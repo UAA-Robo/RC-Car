@@ -1,7 +1,10 @@
+#define LN1 25  // Pin
+#define LN2 26  // Pin
+#define LN3 32  // Pin
+#define LN4 33  // Pin
 
-#define SWITCH 18
-#define LN3 32
-#define LN4 33
+#define PIN_ENA  12 // Pin for controlling speed
+#define PIN_ENB  14 // Pin for controlling speed
 
 #include <WiFi.h>
 #include <WebServer.h>
@@ -18,72 +21,98 @@ IPAddress subnet(255,255,255,0);
 WebServer server(80);
 
 
-
 void setup() {
-  pinMode(SWITCH, INPUT);
-  pinMode(LN3, OUTPUT);
-  pinMode(LN4, OUTPUT);
-  Serial.begin(115200);
-  WiFi.softAP(ssid, password);
-  WiFi.softAPConfig(local_ip, gateway, subnet);
-  delay(100);
-  
-  server.on("/", handle_OnConnect);
-  server.on("/left", handle_left);
-  server.on("/right", handle_right);
-  server.on("/up", handle_up);
-  server.on("/down", handle_down);
-  server.on("/stop", handle_stop);
-  server.onNotFound(handle_NotFound);
-  Serial.println("Wifi has started");
-  server.begin();
-  
+    pinMode(LN1, OUTPUT);
+    pinMode(LN2, OUTPUT);
+    pinMode(LN3, OUTPUT);
+    pinMode(LN4, OUTPUT);
+    pinMode(PIN_ENA, OUTPUT);
+    pinMode(PIN_ENB, OUTPUT);
+
+    Serial.begin(115200);
+    WiFi.softAP(ssid, password);
+    WiFi.softAPConfig(local_ip, gateway, subnet);
+    delay(100);
+    
+    server.on("/", handle_OnConnect);
+    server.on("/left", handle_left);
+    server.on("/right", handle_right);
+    server.on("/up", handle_up);
+    server.on("/down", handle_down);
+    server.on("/stop", handle_stop);
+    server.onNotFound(handle_NotFound);
+    Serial.println("Wifi has started");
+    server.begin();
+
 }
+unsigned long lastCommandTime = 0;
+const unsigned long commandTimeout = 1000; // Timeout in milliseconds (1 second)
 void loop() {
-  server.handleClient();
+    server.handleClient();
 }
 
 
 void handle_OnConnect() {
-  server.send(200, "text/html", SendHTML()); 
+    server.send(200, "text/html", SendHTML()); 
 }
 
 void handle_down() {
+    analogWrite(PIN_ENA, 255); // Full speed (255 max)
+    digitalWrite(LN1,LOW);
+    digitalWrite(LN2,HIGH);
+
+    analogWrite(PIN_ENB, 255); // Full speed (255 max)
     digitalWrite(LN3,LOW);
-  digitalWrite(LN4,LOW);
-  server.send(200, "application/json", "{}"); 
+    digitalWrite(LN4,HIGH);
+    server.send(200, "application/json", "{}"); 
 }
 
 void handle_up() {
-  Serial.println("up");
-    digitalWrite(LN3,LOW);
-  digitalWrite(LN4,LOW);
-  server.send(200, "application/json", "{data:{turn:up}}"); 
+    analogWrite(PIN_ENA, 255); // Full speed (255 max)
+    digitalWrite(LN1,HIGH);
+    digitalWrite(LN2,LOW);
+    
+    analogWrite(PIN_ENB, 255); // Full speed (255 max)
+    digitalWrite(LN3,HIGH);
+    digitalWrite(LN4,LOW);
+    server.send(200, "application/json", "{data:{turn:up}}"); 
 }
 
 void handle_right() {
-    digitalWrite(LN3,LOW);
-  digitalWrite(LN4,HIGH);
-  server.send(200, "application/json", "{}"); 
+    analogWrite(PIN_ENA, 220); // Lower speed (255 max)
+    digitalWrite(LN1,HIGH);
+    digitalWrite(LN2,LOW);
+
+    analogWrite(PIN_ENB, 255); // Full speed (255 max)
+    digitalWrite(LN3,HIGH);
+    digitalWrite(LN4,LOW);
+    server.send(200, "application/json", "{}"); 
 }
 
 void handle_left() {
+    analogWrite(PIN_ENA, 255); // Full speed (255 max)
+    digitalWrite(LN1,HIGH);
+    digitalWrite(LN2,LOW);
+
+    analogWrite(PIN_ENB, 220); // Lower speed (255 max)
     digitalWrite(LN3,HIGH);
-  digitalWrite(LN4,LOW);
-  server.send(200, "application/json", "{}"); 
+    digitalWrite(LN4,LOW);
+    server.send(200, "application/json", "{}"); 
 }
 
 void handle_stop(){
-  digitalWrite(LN3, LOW);
-  digitalWrite(LN4, LOW);
+    digitalWrite(LN1, LOW);
+    digitalWrite(LN2, LOW);
+    digitalWrite(LN3, LOW);
+    digitalWrite(LN4, LOW);
 }
 
 void handle_NotFound(){
-  server.send(404, "text/plain", "Not found");
+    server.send(404, "text/plain", "Not found");
 }
 
 String SendHTML(){
-  String ptr = R"delimiter(
+String ptr = R"delimiter(
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -184,6 +213,10 @@ String SendHTML(){
         function stopControl() {
             // Clear the interval to stop calling controlCar
             clearInterval(intervalId);
+
+            // Several stops just in case
+            fetch("\stop");
+            fetch("\stop");
             fetch("\stop");
         }
     
@@ -213,5 +246,5 @@ String SendHTML(){
 </body>
 </html>
 )delimiter";
-  return ptr;
+return ptr;
 }
