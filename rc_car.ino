@@ -1,17 +1,17 @@
-#define LN1 25  // Pin
-#define LN2 26  // Pin
-#define LN3 32  // Pin
-#define LN4 33  // Pin
+#define PIN_IN1 14 
+#define PIN_IN2 27 
+#define PIN_IN3 26 
+#define PIN_IN4 25 
 
-#define PIN_ENA  12 // Pin for controlling speed
-#define PIN_ENB  14 // Pin for controlling speed
+
+
 
 #include <WiFi.h>
 #include <WebServer.h>
 
 /* Put your SSID & Password */
 const char* ssid = "MyaESP";  // Enter SSID here
-const char* password = "1234";  //Enter Password here
+const char* password = "12345678";  //Enter Password here
 
 /* Put IP Address details */
 IPAddress local_ip(192,168,1,2);
@@ -22,12 +22,13 @@ WebServer server(80);
 
 
 void setup() {
-    pinMode(LN1, OUTPUT);
-    pinMode(LN2, OUTPUT);
-    pinMode(LN3, OUTPUT);
-    pinMode(LN4, OUTPUT);
-    pinMode(PIN_ENA, OUTPUT);
-    pinMode(PIN_ENB, OUTPUT);
+    pinMode(PIN_IN1, OUTPUT);
+    pinMode(PIN_IN2, OUTPUT);
+    pinMode(PIN_IN3, OUTPUT);
+    pinMode(PIN_IN4, OUTPUT);
+
+
+
 
     Serial.begin(115200);
     WiFi.softAP(ssid, password);
@@ -57,54 +58,54 @@ void handle_OnConnect() {
 }
 
 void handle_down() {
-    analogWrite(PIN_ENA, 255); // Full speed (255 max)
-    digitalWrite(LN1,LOW);
-    digitalWrite(LN2,HIGH);
+    digitalWrite(PIN_IN1,LOW);
+    digitalWrite(PIN_IN2,HIGH);
 
-    analogWrite(PIN_ENB, 255); // Full speed (255 max)
-    digitalWrite(LN3,LOW);
-    digitalWrite(LN4,HIGH);
+    digitalWrite(PIN_IN3,LOW);
+    digitalWrite(PIN_IN4,HIGH);
+
     server.send(200, "application/json", "{}"); 
 }
 
 void handle_up() {
-    analogWrite(PIN_ENA, 255); // Full speed (255 max)
-    digitalWrite(LN1,HIGH);
-    digitalWrite(LN2,LOW);
-    
-    analogWrite(PIN_ENB, 255); // Full speed (255 max)
-    digitalWrite(LN3,HIGH);
-    digitalWrite(LN4,LOW);
+
+    digitalWrite(PIN_IN1,HIGH);
+    digitalWrite(PIN_IN2,LOW);
+
+    digitalWrite(PIN_IN3,HIGH);
+    digitalWrite(PIN_IN4,LOW);
+
+
     server.send(200, "application/json", "{data:{turn:up}}"); 
 }
 
 void handle_right() {
-    analogWrite(PIN_ENA, 220); // Lower speed (255 max)
-    digitalWrite(LN1,HIGH);
-    digitalWrite(LN2,LOW);
+    digitalWrite(PIN_IN1,LOW);
+    digitalWrite(PIN_IN2,HIGH);
 
-    analogWrite(PIN_ENB, 255); // Full speed (255 max)
-    digitalWrite(LN3,HIGH);
-    digitalWrite(LN4,LOW);
+    digitalWrite(PIN_IN3,HIGH);
+    digitalWrite(PIN_IN4,LOW);
+
+
     server.send(200, "application/json", "{}"); 
 }
 
 void handle_left() {
-    analogWrite(PIN_ENA, 255); // Full speed (255 max)
-    digitalWrite(LN1,HIGH);
-    digitalWrite(LN2,LOW);
+    digitalWrite(PIN_IN1,HIGH);
+    digitalWrite(PIN_IN2,LOW);
 
-    analogWrite(PIN_ENB, 220); // Lower speed (255 max)
-    digitalWrite(LN3,HIGH);
-    digitalWrite(LN4,LOW);
+    digitalWrite(PIN_IN3,LOW);
+    digitalWrite(PIN_IN4,HIGH);
+
     server.send(200, "application/json", "{}"); 
 }
 
 void handle_stop(){
-    digitalWrite(LN1, LOW);
-    digitalWrite(LN2, LOW);
-    digitalWrite(LN3, LOW);
-    digitalWrite(LN4, LOW);
+    digitalWrite(PIN_IN1, LOW);
+    digitalWrite(PIN_IN2, LOW);
+    digitalWrite(PIN_IN3, LOW);
+    digitalWrite(PIN_IN4, LOW);
+
 }
 
 void handle_NotFound(){
@@ -207,7 +208,7 @@ String ptr = R"delimiter(
             // Set an interval to call it repeatedly every 100ms
             intervalId = setInterval(function() {
                 controlCar(direction);
-            }, 100);
+            }, 300);
         }
     
         function stopControl() {
