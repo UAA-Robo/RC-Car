@@ -12,7 +12,8 @@
 // See the following for generating UUIDs:
 // https://www.uuidgenerator.net/
 
-#define SERVICE_UUID        "f2c12ff2-f8a8-425d-a866-9a1a24ae4fb9"
+//#define SERVICE_UUID        "f2c12ff2-f8a8-425d-a866-9a1a24ae4fb9"
+#define SERVICE_UUID        "13e61f5b-623a-4380-84a2-86ca9bdb7791"
 #define CHARACTERISTIC_UUID "348c2643-3137-41fd-97bc-a8f66bc8df91"
 
 void setup() {
@@ -41,6 +42,14 @@ void setup() {
 }
 
 void loop() {
+
+  Serial.println("Here2");
   // put your main code here, to run repeatedly:
+    //  if (pCharacteristic->getValue().length() > 0) {
+  //   std::string rxValue = pCharacteristic->getValue();
+  //   for (int i = 0; i < rxValue.length(); i++) {
+  //     Serial1.write(rxValue[i]); // Send each character to ArduinoBlue
+  //   }
+  // }
   delay(2000);
 }
