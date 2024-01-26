@@ -85,7 +85,7 @@ void loop()
   // TODO you loop code
   if (RemoteXY.up == 1){
     drive_forward();
-  } else if (RemoteXY.up == 1) {
+  } else if (RemoteXY.down == 1) {
     drive_backward();
   } else if (RemoteXY.left == 1) {
     turn_left();
