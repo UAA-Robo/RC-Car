@@ -26,7 +26,7 @@
 #include <ArduinoBlue.h> // ArduinoBlue bluetooth library
 #include <HardwareSerial.h>
 
-HardwareSerial serialTemp( 2 );
+HardwareSerial serialStore( 2 );
 
 BLEServer* pServer = NULL;
 BLECharacteristic* pCharacteristic = NULL;
@@ -40,7 +40,7 @@ uint32_t value = 0;
 //EspSoftwareSerial::UART softSerial;
 
 // SoftwareSerial softSerial(BLUETOOTH_TX, BLUETOOTH_RX);
-// ArduinoBlue phone(Serial1); // Object for smartphone robot control.ArduinoBlue phone(softSerial); // Object for smartphone robot control.
+ArduinoBlue phone(serialStore); // Object for smartphone robot control.ArduinoBlue phone(softSerial); // Object for smartphone robot control.
 
 // See the following for generating UUIDs:
 // https://www.uuidgenerator.net/
@@ -65,7 +65,7 @@ class MyServerCallbacks: public BLEServerCallbacks {
 void setup() {
   Serial.begin(115200);
   // Serial1.begin(115200); 
-  serialTemp.begin(115200);
+  serialStore.begin(115200);
   Serial.println("Herellll");
 
   
