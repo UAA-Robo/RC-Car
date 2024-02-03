@@ -34,19 +34,19 @@ void drive_backward() {
 }
 
 void turn_right() {
-    digitalWrite(RIGHT_MOTORS_POWER,LOW);
-    digitalWrite(RIGHT_MOTORS_GROUND,HIGH);
-
-    digitalWrite(LEFT_MOTORS_POWER,HIGH);
-    digitalWrite(LEFT_MOTORS_GROUND,LOW);
-}
-
-void turn_left() {
     digitalWrite(RIGHT_MOTORS_POWER,HIGH);
     digitalWrite(RIGHT_MOTORS_GROUND,LOW);
 
     digitalWrite(LEFT_MOTORS_POWER,LOW);
     digitalWrite(LEFT_MOTORS_GROUND,HIGH);
+}
+
+void turn_left() {
+    digitalWrite(RIGHT_MOTORS_POWER,LOW);
+    digitalWrite(RIGHT_MOTORS_GROUND,HIGH);
+
+    digitalWrite(LEFT_MOTORS_POWER,HIGH);
+    digitalWrite(LEFT_MOTORS_GROUND,LOW);
 }
 
 void stop(){
