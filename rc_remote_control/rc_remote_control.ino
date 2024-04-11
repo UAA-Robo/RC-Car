@@ -59,10 +59,15 @@ struct {
 /////////////////////////////////////////////
 
 
-#define RIGHT_MOTORS_POWER 14 
-#define RIGHT_MOTORS_GROUND 27 
-#define LEFT_MOTORS_POWER 26 
-#define LEFT_MOTORS_GROUND 25 
+
+#define RIGHT_MOTORS_POWER 26 
+#define RIGHT_MOTORS_GROUND 25 
+#define LEFT_MOTORS_POWER 33 
+#define LEFT_MOTORS_GROUND 32
+//#define RIGHT_MOTORS_POWER 14 
+//#define RIGHT_MOTORS_GROUND 27 
+// #define LEFT_MOTORS_POWER 26 
+// #define LEFT_MOTORS_GROUND 25 
 
 
 void setup() 
