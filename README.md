@@ -1,7 +1,7 @@
 # RC-Car
 This is a RC Car Workshop tutorial. To create this car, follow the below steps.
 
-### BOM (Bill of Materials)
+## BOM (Bill of Materials)
 
 | Name                         | Number Units |
 |------------------------------|--------------|
@@ -22,6 +22,7 @@ This is a RC Car Workshop tutorial. To create this car, follow the below steps.
 <img src="photos/BOM.JPG" alt="3D prints" width="300">
 
 
+## Instructions
 
 ### 1. 3D Print your parts.
 3D print the chassis (CAD/chassis.stl) and 4 wheels (CAD/wheel.stl). Optionally, you can print fun ad-ons/mods (CAD/Mods/...).
@@ -41,7 +42,7 @@ Flip over the chassi, add the breadboard, and batttery holders using tape or hot
 <img src="photos/wiring.JPG" alt="3D prints" width="300" height="200">
 
 
-### 4.  Upload Code to your arduino.
+### 4.  Upload Code to your ESP32.
 a. Make sure the Arduino IDE and UART Driver is installed on your computers:
 
     i. Arduino IDE: https://www.arduino.cc/en/software	
@@ -56,19 +57,32 @@ c. Plug in the ESP32 to your computer and click on the new port that is added in
 
 d. Now time to code! Copy/Paste one of the following programs into the editor and make sure save it is saved: 
 
-    i. Program different functions to turn the motors: https://github.com/UAA-Robo/RC-Car/blob/main/rc_motor_test.ino
+    i. Program different functions to turn the motors: https://github.com/UAA-Robo/RC-Car/blob/main/code/rc_motor_functions/rc_motor_functions.ino
 
-    ii. Program the code to be remote controlled w/ bluetooth:https://github.com/UAA-Robo/RC-Car/blob/main/rc_remote_control.ino	
+    ii. Program the code to be remote controlled w/ bluetooth: https://github.com/UAA-Robo/RC-Car/blob/main/code/rc_remote_control/rc_remote_control.ino
 
 e. Make sure the ESP32 is plugged into the computer and press the arrow to upload to the ESP32. The program will immediately begin.
 
-f. If you’re running the remote control code (4b).You will also need to download the RemoteXY (https://remotexy.com/en/download/) app
+f. If you’re running the remote control code (d.ii), you will also need to download the RemoteXY (https://remotexy.com/en/download/) app
 
-    i. Open the app and click “+” > “Bluetooth LE”. Select your “myESP32” as your device (unless you change it in the code. You should then connect
+    i. Open the app and click “+” > “Bluetooth LE”. Select your “myESP32” as your device (unless you change it in the code).You should then connect
 
 
 ### 5. Add battteries.
-Double check your wiring and add batteries
+Unplug the ESP32, double check your wiring, and add batteries. Once lights turn on both the ESP32 and motor driver, your code is running.
+
+
+
+## Troubleshooting Tips
+* No wheels are turning and no lights are showing on the ESP32 or Motor Drivers.
+    * Check that your wiring still matches the diagram (especially the battery connections).
+    * Replace all the batteries.
+* Wheels not turning the right direction, or some are not turning:
+    * Check that your wiring still matches the diagram. 
+    * Check that everything is connected fully and the motor wiring still touches the motor tabs.
+* Bluetooth keeps disconnecting and lights on the Motor Drivers flicker.
+    * One of the batteries may be low on voltage. Try replacing one or all of the  batteries
+
 
 
 
