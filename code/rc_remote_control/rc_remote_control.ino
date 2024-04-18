@@ -59,15 +59,10 @@ struct {
 /////////////////////////////////////////////
 
 
-
-#define RIGHT_MOTORS_POWER 26 
-#define RIGHT_MOTORS_GROUND 25 
-#define LEFT_MOTORS_POWER 33 
-#define LEFT_MOTORS_GROUND 32
-//#define RIGHT_MOTORS_POWER 14 
-//#define RIGHT_MOTORS_GROUND 27 
-// #define LEFT_MOTORS_POWER 26 
-// #define LEFT_MOTORS_GROUND 25 
+#define LEFT_MOTORS_POWER 27 //IN2
+#define LEFT_MOTORS_GROUND 26 // IN1
+#define RIGHT_MOTORS_POWER 12  //IN4
+#define RIGHT_MOTORS_GROUND 14  //IN3
 
 
 void setup() 
@@ -119,7 +114,7 @@ void drive_backward() {
     digitalWrite(LEFT_MOTORS_GROUND,HIGH);
 }
 
-void turn_right() {
+void turn_left() {
     digitalWrite(RIGHT_MOTORS_POWER,HIGH);
     digitalWrite(RIGHT_MOTORS_GROUND,LOW);
 
@@ -127,7 +122,7 @@ void turn_right() {
     digitalWrite(LEFT_MOTORS_GROUND,HIGH);
 }
 
-void turn_left() {
+void turn_right() {
     digitalWrite(RIGHT_MOTORS_POWER,LOW);
     digitalWrite(RIGHT_MOTORS_GROUND,HIGH);
 
