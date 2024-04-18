@@ -27,7 +27,7 @@
 #include <RemoteXY.h>
 
 // RemoteXY connection settings 
-#define REMOTEXY_BLUETOOTH_NAME "MyaESP"
+#define REMOTEXY_BLUETOOTH_NAME "MyESP"
 
 
 // RemoteXY configurate  

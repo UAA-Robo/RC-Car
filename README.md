@@ -30,16 +30,15 @@ This is a RC Car Workshop tutorial. To create this car, follow the below steps.
 <img src="photos/prints.JPG" alt="3D prints" width="300">
 
 ### 2. Attach your motors and wheels
-Use zipties to attach your motors to the bottom of your chassi. Add the wheels to the motors.
+Use zipties to attach your motors to the bottom of your chassi. Note: be careful of motor orientation. Add the wheels to the motors.
 
-<img src="photos/prints.JPG" alt="3D prints" width="300" height="200">
+<img src="photos/motors.JPG" alt="3D prints" width="300" >
 
 ### 3.  Wire your components
-Flip over the chassi, add the breadboard, and batttery holders using tape or hot glue to secure as necessary. Wire the components using the following wiring diagram.
+Flip over the chassi, add the breadboard, and batttery holders using tape or hot glue to secure as necessary. Wire the components using the following wiring diagram. Do NOT add the batteries yet.
 
-
-
-<img src="photos/wiring.JPG" alt="3D prints" width="300" height="200">
+<img src="photos/wiringDiagram.JPG" alt="3D prints" width="300">
+<img src="photos/wiring.JPG" alt="3D prints" width="300">
 
 
 ### 4.  Upload Code to your ESP32.
@@ -70,6 +69,8 @@ f. If you’re running the remote control code (d.ii), you will also need to dow
 
 ### 5. Add battteries.
 Unplug the ESP32, double check your wiring, and add batteries. Once lights turn on both the ESP32 and motor driver, your code is running.
+
+<img src="photos/batteries.JPG" alt="3D prints" width="300">
 
 
 
